@@ -68,3 +68,28 @@ See also the [Contribution Guide](https://github.com/pingcap/community/blob/mast
 ## License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpingcap%2Ftiup.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpingcap%2Ftiup?ref=badge_large)
+
+## wiki-vec-bench benchmark helper
+
+To run the `wiki-vec-bench` write benchmark against a local TiDB playground
+started by TiUP (default `root@127.0.0.1:4000/test`):
+
+```bash
+# Build
+cd wiki-vec-bench
+cargo build --release
+
+# Insert-only workload with FULLTEXT index
+./target/release/wiki-vec-bench \
+  --mode insert-only \
+  --concurrency 16 \
+  --duration 60 \
+  --build-index true
+
+# Update-mixed workload without FULLTEXT index
+./target/release/wiki-vec-bench \
+  --mode update-mixed \
+  --concurrency 16 \
+  --duration 60 \
+  --build-index false
+```
